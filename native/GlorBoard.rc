@@ -1,0 +1,30 @@
+#include <windows.h>
+
+101 ICON "../src/GlorBoard/GlorBoard.ico"
+102 ICON "../src/GlorBoard/Assets/KeycapE.ico"
+103 ICON "../src/GlorBoard/Assets/KeycapV.ico"
+
+1 VERSIONINFO
+ FILEVERSION 1,2,2,0
+ PRODUCTVERSION 1,2,2,0
+ FILEFLAGSMASK 0x3fL
+ FILEOS VOS_NT_WINDOWS32
+ FILETYPE VFT_APP
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "FileDescription", "GlorBoard native input and tray"
+            VALUE "FileVersion", "1.2.2"
+            VALUE "InternalName", "GlorBoard"
+            VALUE "OriginalFilename", "GlorBoard.exe"
+            VALUE "ProductName", "GlorBoard"
+            VALUE "ProductVersion", "1.2.2"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0409, 1200
+    END
+END

@@ -1,0 +1,122 @@
+<Window x:Class="GlorBoard.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="GlorBoard" Width="752" Height="396" ResizeMode="CanMinimize"
+        Foreground="{DynamicResource Text}"
+        WindowStartupLocation="CenterScreen" Icon="GlorBoard.ico"
+        FontFamily="Segoe UI Variable Text, Segoe UI" FontSize="14" UseLayoutRounding="True">
+    <ContentControl Style="{StaticResource GlassWindowSurface}">
+        <Grid>
+            <Grid.RowDefinitions><RowDefinition Height="82"/><RowDefinition/></Grid.RowDefinitions>
+            <Border Margin="20,14,20,10" Padding="10,6" Style="{StaticResource GlassDock}" MouseLeftButtonDown="DragWindow">
+                <Grid>
+                    <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                        <Image Width="37" Height="37" Margin="0,0,9,0" Source="Assets/GlorBoard.png"
+                               RenderOptions.BitmapScalingMode="HighQuality">
+                            <Image.Clip><RectangleGeometry Rect="0,0,37,37" RadiusX="10" RadiusY="10"/></Image.Clip>
+                        </Image>
+                        <TextBlock Text="GlorBoard" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Orientation="Horizontal">
+                        <Button x:Name="AppearanceButton" Click="AppearanceClick" Style="{StaticResource AppearanceButtonStyle}"
+                                Margin="0,0,8,0"/>
+                        <Button x:Name="MinimizeButton" Click="MinimizeClick" Style="{StaticResource GlassIconButton}" Margin="0,0,6,0">
+                            <Geometry>M3,8 L13,8</Geometry>
+                        </Button>
+                        <Button x:Name="CloseButton" Click="CloseClick" Style="{StaticResource GlassIconButton}">
+                            <Geometry>M4,4 L12,12 M12,4 L4,12</Geometry>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
+                <StackPanel Margin="20,0,20,18">
+                    <Grid>
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="218"/><ColumnDefinition Width="15"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                        <Border Style="{StaticResource GlassCard}" Height="146">
+                            <Grid Margin="18,14">
+                                <Grid.RowDefinitions><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+                                <StackPanel>
+                                    <Image x:Name="ModeIcon" Width="43" Height="43" HorizontalAlignment="Left"
+                                           RenderOptions.BitmapScalingMode="HighQuality"/>
+                                    <TextBlock x:Name="ModeTitle" FontWeight="SemiBold" FontSize="22" Margin="0,8,0,0"/>
+                                </StackPanel>
+                                <CheckBox Grid.Row="1" x:Name="ModeSwitch" Click="ModeClick">
+                                    <TextBlock x:Name="ModeStatus" Style="{StaticResource Hint}"/>
+                                </CheckBox>
+                            </Grid>
+                        </Border>
+                        <Border Grid.Column="2" Style="{StaticResource GlassCard}" Padding="18,13">
+                            <Grid>
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="89"/><ColumnDefinition Width="*"/><ColumnDefinition Width="38"/></Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions><RowDefinition/><RowDefinition/></Grid.RowDefinitions>
+                                <TextBlock x:Name="EncodingLabel" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                                <ComboBox x:Name="EncodingChoices" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" SelectionChanged="SelectionChanged" AutomationProperties.LabeledBy="{Binding ElementName=EncodingLabel}"/>
+                                <TextBlock x:Name="MethodLabel" Grid.Row="1" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                                <ComboBox x:Name="MethodChoices" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" SelectionChanged="SelectionChanged" AutomationProperties.LabeledBy="{Binding ElementName=MethodLabel}"/>
+                                <Button x:Name="MethodOptionsButton" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"
+                                        HorizontalAlignment="Right" Style="{StaticResource GlassIconButton}" Click="MethodOptionsClick">
+                                    <Geometry>M3,8 L3.1,8 M8,8 L8.1,8 M13,8 L13.1,8</Geometry>
+                                </Button>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <Border Style="{StaticResource GlassDock}" Padding="10,7,10,9" Margin="0,12,0,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="218"/><ColumnDefinition Width="15"/><ColumnDefinition/><ColumnDefinition Width="161"/></Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <TextBlock x:Name="ShortcutLabel" Style="{StaticResource Hint}" Margin="1,0,0,6"/>
+                            <ComboBox x:Name="ShortcutChoices" SelectionChanged="SelectionChanged" AutomationProperties.LabeledBy="{Binding ElementName=ShortcutLabel}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <TextBlock x:Name="MoreLabel" Style="{StaticResource Hint}" Margin="1,0,0,6"/>
+                            <Button x:Name="AdvancedButton" HorizontalAlignment="Left" Height="39" MinWidth="111" Click="AdvancedClick"/>
+                        </StackPanel>
+                        <Button x:Name="OkButton" Content="OK" Grid.Column="3" Style="{StaticResource Primary}" Height="40" VerticalAlignment="Bottom" Click="CloseClick"/>
+                    </Grid>
+                    </Border>
+                    <Grid x:Name="AdvancedPanel" Visibility="Collapsed" Margin="0,16,0,0">
+                        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="14"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                        <Border Style="{StaticResource GlassCard}" Padding="15,12">
+                            <StackPanel>
+                                <TextBlock x:Name="TypingHeading" FontWeight="SemiBold" FontSize="15" Margin="0,0,0,5"/>
+                                <StackPanel x:Name="TypingOptions"/>
+                            </StackPanel>
+                        </Border>
+                        <StackPanel Grid.Column="2">
+                            <Border Style="{StaticResource GlassCard}" Padding="15,12">
+                                <StackPanel>
+                                    <TextBlock x:Name="SystemHeading" FontWeight="SemiBold" FontSize="15" Margin="0,0,0,5"/>
+                                    <StackPanel x:Name="SystemOptions"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{StaticResource GlassCard}" Padding="15,12" Margin="0,10,0,0">
+                                <StackPanel>
+                                    <TextBlock x:Name="MacrosHeading" FontWeight="SemiBold" FontSize="15" Margin="0,0,0,5"/>
+                                    <StackPanel x:Name="MacroOptions"/>
+                                    <Button x:Name="MacroButton" HorizontalAlignment="Left" Margin="0,7,0,0" Click="MacroClick"/>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                        <Button x:Name="ExitButton" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Margin="0,10,0,0" Click="ExitClick"/>
+                    </Grid>
+                    <Border Style="{StaticResource GlassDock}" Padding="8,5,12,5" Margin="0,12,0,0">
+                    <Grid>
+                        <StackPanel Orientation="Horizontal">
+                            <Button x:Name="GuideButton" Background="Transparent" BorderBrush="Transparent" Padding="9,6" Click="GuideClick"/>
+                            <Button x:Name="InfoButton" Background="Transparent" BorderBrush="Transparent" Padding="9,6" Click="InfoClick"/>
+                            <Button x:Name="DefaultsButton" Background="Transparent" BorderBrush="Transparent" Padding="9,6" Click="DefaultsClick"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Ellipse x:Name="StatusDot" Width="6" Height="6" Fill="{DynamicResource Success}" VerticalAlignment="Center" Margin="0,0,7,0"/>
+                            <TextBlock x:Name="SystemStatus" Style="{StaticResource Hint}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </ContentControl>
+</Window>

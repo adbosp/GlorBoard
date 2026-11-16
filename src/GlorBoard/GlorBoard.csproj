@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AssemblyTitle>GlorBoard</AssemblyTitle>
+    <Description>Bộ gõ tiếng Việt Telex và VNI</Description>
+    <Version>1.2.4</Version>
+    <ApplicationIcon>GlorBoard.ico</ApplicationIcon>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="GlorBoard.ico" />
+    <Resource Include="Assets\GlorBoard.png;Assets\KeycapE.png;Assets\KeycapV.png;Assets\KeycapE.ico;Assets\KeycapV.ico" />
+  </ItemGroup>
+</Project>
