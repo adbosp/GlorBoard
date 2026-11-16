@@ -66,8 +66,8 @@ public partial class MainWindow
         content.Children.Add(Paragraph(T("Chọn Telex hoặc VNI rồi gõ trong ứng dụng đang mở. Dùng Ctrl + Shift hoặc Alt + Z để chuyển giữa EN và VI.",
             "Choose Telex or VNI, then type in another app. Use Ctrl + Shift or Alt + Z to switch between EN and VI.")));
         content.Children.Add(Paragraph("Telex    tieengs Vieetj  →  tiếng Việt\nVNI       tie6ng1 Vie6t5  →  tiếng Việt"));
-        content.Children.Add(Paragraph(T("Gõ tắt bung nội dung khi nhập dấu cách, dấu câu, Enter hoặc Tab. Nhấp đúp biểu tượng ở khay để mở lại GlorBoard.",
-            "Text shortcuts expand on Space, punctuation, Enter, or Tab. Double-click the tray icon to reopen GlorBoard.")));
+        content.Children.Add(Paragraph(T("Gõ tắt bung nội dung khi nhập dấu cách, dấu câu, Enter hoặc Tab. Nhấp trái biểu tượng ở khay để đổi V/E. Nhấp phải và chọn Mở GlorBoard để mở bảng điều khiển.",
+            "Text shortcuts expand on Space, punctuation, Enter, or Tab. Left-click the tray icon to switch V/E. Right-click and select Open GlorBoard to open the control panel.")));
         content.Children.Add(Paragraph(T("Nếu đang dùng bộ gõ tiếng Việt khác, hãy tắt chế độ tiếng Việt ở bộ gõ đó trước khi bật GlorBoard.",
             "Turn off Vietnamese input in other keyboard tools before enabling GlorBoard.")));
         content.Children.Add(Paragraph(T("Để gõ trong ứng dụng chạy với quyền quản trị, mở GlorBoard với cùng mức quyền.",

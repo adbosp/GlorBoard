@@ -19,7 +19,6 @@ constexpr UINT settingsNotificationMessage = WM_APP + 13;
 constexpr UINT uiModeMessage = WM_APP + 20;
 constexpr UINT uiMethodMessage = WM_APP + 21;
 constexpr UINT uiExitMessage = WM_APP + 22;
-constexpr UINT clickTimer = 102;
 constexpr UINT openItem = 201, toggleItem = 202, telexItem = 203, vniItem = 204, exitItem = 205;
 
 Preferences options;
@@ -37,7 +36,6 @@ std::wstring lastApplication;
 bool ready = false;
 int lastTrayState = -1;
 bool lastLanguage = false;
-bool ignoreNextRelease = false;
 
 const wchar_t* tr(const wchar_t* vietnamese, const wchar_t* english) {
     return options.vietnamese ? vietnamese : english;
@@ -211,24 +209,12 @@ LRESULT CALLBACK windowProc(HWND window, UINT message, WPARAM wParam, LPARAM lPa
     switch (message) {
         case trayEvent:
             switch (lParam) {
-                case WM_LBUTTONUP:
-                    if (!ignoreNextRelease) SetTimer(window, clickTimer, GetDoubleClickTime(), nullptr);
-                    ignoreNextRelease = false;
-                    break;
-                case WM_LBUTTONDBLCLK:
-                    KillTimer(window, clickTimer);
-                    ignoreNextRelease = true;
-                    openSettings();
-                    break;
-                case WM_RBUTTONUP: KillTimer(window, clickTimer); showTrayMenu(); break;
+                case WM_LBUTTONUP: handleTrayToggle(); break;
+                case WM_RBUTTONUP: showTrayMenu(); break;
             }
             return 0;
         case WM_TIMER:
             if (wParam == Keyboard::clipboardTimer) keyboard->restoreClipboard();
-            if (wParam == clickTimer) {
-                KillTimer(window, clickTimer);
-                handleTrayToggle();
-            }
             return 0;
         case openSettingsMessage: openSettings(); return 0;
         case saveModeMessage:

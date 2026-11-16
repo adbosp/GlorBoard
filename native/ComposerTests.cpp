@@ -20,15 +20,21 @@ int main() {
         {L"quoocs", L"quốc"}, {L"giaif", L"giài"}, {L"uwowu", L"ươu"}, {L"Toanfs", L"Toán"},
         {L"toansz", L"toan"}, {L"toanss", L"toans"}, {L"awrq", L"awrq"}, {L"hoas", L"hóa"},
         {L"hoafng", L"hoàng"}, {L"thuyr", L"thủy"}, {L"NGUYEENX", L"NGUYỄN"}, {L"[", L"ư"},
-        {L"]", L"ơ"}, {L"w", L"ư"}, {L"khuaats", L"khuất"}, {L"tree", L"trê"}, {L"goox", L"gỗ"},
+        {L"]", L"ơ"}, {L"w", L"ư"}, {L"www", L"w"}, {L"WWW", L"W"}, {L"Www", L"W"},
+        {L"wwww", L"ww"}, {L"bwww", L"bwww"}, {L"khuaats", L"khuất"}, {L"tree", L"trê"}, {L"goox", L"gỗ"},
         {L"hai", L"hai"}, {L"gif", L"gì"}, {L"khuyur", L"khuỷu"},
     };
     for (const auto& [keys, expected] : telex) check(keys, expected);
+    check(L"WWW", L"WWW", false);
+    options.standaloneW = false;
+    check(L"www", L"w");
+    options.standaloneW = true;
     options.modernTone = true;
     check(L"hoas", L"hoá");
     check(L"quys", L"quý");
     options.modernTone = false;
     options.method = 1;
+    check(L"WWW", L"WWW");
     const std::pair<const wchar_t*, const wchar_t*> vni[] = {
         {L"tie6ng1", L"tiếng"}, {L"Vie6t5", L"Việt"}, {L"d9u7o7ng2", L"đường"}, {L"duong9772", L"đường"},
         {L"cha8m", L"chăm"}, {L"toan21", L"toán"}, {L"toan10", L"toan"}, {L"HELLO123", L"HELLO123"},
@@ -52,7 +58,7 @@ int main() {
     } else ++passed;
     for (int method = 0; method < 2; ++method) {
         options.method = method;
-        const std::wstring_view keys = method == 0 ? L"tieengs Vieetj " : L"tie6ng1 Vie6t5 ";
+        const std::wstring_view keys = method == 0 ? L"tieengs Vieetj WWW " : L"tie6ng1 Vie6t5 WWW ";
         std::wstring document, displayed;
         composer.reset();
         for (wchar_t key : keys) {
@@ -69,7 +75,7 @@ int main() {
             displayed = boundary ? std::wstring{} : next;
             if (boundary) composer.reset();
         }
-        if (document == L"tiếng Việt ") ++passed;
+        if (document == (method == 0 ? L"tiếng Việt W " : L"tiếng Việt WWW ")) ++passed;
         else { ++failed; std::fwprintf(stderr, L"FAIL keyboard replacement: %ls\n", document.c_str()); }
     }
     std::printf("Composer: %d passed, %d failed\n", passed, failed);

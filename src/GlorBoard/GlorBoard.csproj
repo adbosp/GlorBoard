@@ -9,7 +9,7 @@
     <ImplicitUsings>disable</ImplicitUsings>
     <AssemblyTitle>GlorBoard</AssemblyTitle>
     <Description>Bộ gõ tiếng Việt Telex và VNI</Description>
-    <Version>1.2.4</Version>
+    <Version>1.2.6</Version>
     <ApplicationIcon>GlorBoard.ico</ApplicationIcon>
     <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
   </PropertyGroup>

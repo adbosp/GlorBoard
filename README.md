@@ -4,7 +4,11 @@ GlorBoard là bộ gõ tiếng Việt Telex và VNI cho Windows, gồm bộ gõ 
 
 ## Tải và sử dụng
 
-Tải `GlorBoard-1.2.4-win-x64.zip` từ [GitHub Releases](https://github.com/adbosp/GlorBoard/releases/latest). Giải nén toàn bộ gói rồi mở `GlorBoard.exe`. Giữ `GlorBoard.Panel.exe` cùng thư mục để mở bảng điều khiển.
+Tải gói Windows x64 từ [GitHub Releases](https://github.com/adbosp/GlorBoard/releases/latest). Giải nén toàn bộ gói rồi mở `GlorBoard.exe`. Giữ `GlorBoard.Panel.exe` cùng thư mục để mở bảng điều khiển.
+
+Nhấp trái vào biểu tượng V/E ở khay hệ thống để đổi chế độ gõ. Để mở bảng điều khiển, nhấp phải vào biểu tượng và chọn **Mở GlorBoard**.
+
+Trong Telex, gõ `www` hoặc `WWW` ở đầu từ để nhập một chữ `w` hoặc `W`.
 
 ## Build trên Windows
 

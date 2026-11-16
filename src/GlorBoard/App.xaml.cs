@@ -100,13 +100,9 @@ public partial class App : Application
         englishIcon = LoadTrayIcon("E");
 
         tray = new() { Icon = vietnameseIcon, Text = "GlorBoard", Visible = true };
-        tray.MouseClick += (_, args) =>
+        tray.MouseUp += (_, args) =>
         {
-            if (args.Button == Forms.MouseButtons.Left && args.Clicks == 1) ToggleMode();
-        };
-        tray.MouseDoubleClick += (_, args) =>
-        {
-            if (args.Button == Forms.MouseButtons.Left) ShowWindow();
+            if (args.Button == Forms.MouseButtons.Left) ToggleMode();
         };
         tray.ContextMenuStrip = new();
         tray.ContextMenuStrip.Opening += (_, _) => UpdateTrayMenu();

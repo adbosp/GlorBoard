@@ -67,14 +67,23 @@ internal sealed class VietnameseInput
         }
 
         raw += key;
+        bool telex = options.Method == InputMethod.Telex;
+        char lower = char.ToLowerInvariant(key);
+        // A third W completes the literal sequence even after the second W escaped ư.
+        if (enabled && telex && raw.Length == 3 && lower == 'w' &&
+            char.ToLowerInvariant(raw[0]) == 'w' && char.ToLowerInvariant(raw[1]) == 'w')
+        {
+            word = raw[..1];
+            canRestore = false;
+            literalRemainder = true;
+            return;
+        }
         if (!enabled || literalRemainder)
         {
             word += key;
             return;
         }
 
-        bool telex = options.Method == InputMethod.Telex;
-        char lower = char.ToLowerInvariant(key);
         int requestedTone = telex ? "sfrxj".IndexOf(lower) + 1 : "12345".IndexOf(lower) + 1;
 
         if (requestedTone > 0 && ToneIndex(word, options.ModernTone) >= 0 &&

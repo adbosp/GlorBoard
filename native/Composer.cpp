@@ -174,13 +174,21 @@ void Composer::add(wchar_t key, const Preferences& options, bool enabled) {
         return;
     }
     raw += key;
+    const bool telex = options.method == 0;
+    const wchar_t lower = lowerCase(key);
+    // A third W completes the literal sequence even after the second W escaped ư.
+    if (enabled && telex && raw.size() == 3 && lower == L'w' &&
+        lowerCase(raw[0]) == L'w' && lowerCase(raw[1]) == L'w') {
+        word.assign(1, raw[0]);
+        canRestore = false;
+        literalRemainder = true;
+        return;
+    }
     if (!enabled || literalRemainder) {
         word += key;
         return;
     }
 
-    const bool telex = options.method == 0;
-    const wchar_t lower = lowerCase(key);
     const int requested = indexOf(telex ? L"sfrxj" : L"12345", lower) + 1;
     if (requested > 0 && toneIndex(word, options.modernTone) >= 0 &&
         (!options.spellCheck || isSyllable(word, 0) || (options.freeTyping && isSyllable(word, 0, true)))) {
